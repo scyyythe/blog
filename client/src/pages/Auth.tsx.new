@@ -26,19 +26,14 @@ const Auth = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (isLogin) {
       // Simple login simulation
       const users = JSON.parse(localStorage.getItem("thread_users") || "[]");
-      const user = users.find(
-        (u: any) => u.email === email && u.password === password
-      );
-
+      const user = users.find((u: any) => u.email === email && u.password === password);
+      
       if (user) {
-        localStorage.setItem(
-          "thread_user",
-          JSON.stringify({ email: user.email, name: user.name })
-        );
+        localStorage.setItem("thread_user", JSON.stringify({ email: user.email, name: user.name }));
         toast({ title: "Welcome back!" });
         navigate("/home");
       } else {
@@ -50,18 +45,18 @@ const Auth = () => {
         toast({ title: "Please fill all fields", variant: "destructive" });
         return;
       }
-
+      
       const users = JSON.parse(localStorage.getItem("thread_users") || "[]");
-
+      
       if (users.find((u: any) => u.email === email)) {
         toast({ title: "Email already exists", variant: "destructive" });
         return;
       }
-
+      
       users.push({ email, password, name });
       localStorage.setItem("thread_users", JSON.stringify(users));
       localStorage.setItem("thread_user", JSON.stringify({ email, name }));
-
+      
       toast({ title: "Account created successfully!" });
       navigate("/home");
     }
@@ -81,8 +76,8 @@ const Auth = () => {
         </div>
 
         <div className="border border-border rounded-lg p-6">
-          <GoogleAuthButton
-            mode={isLogin ? "login" : "register"}
+          <GoogleAuthButton 
+            mode={isLogin ? "login" : "register"} 
             className="mb-6"
           />
           <div className="relative mb-6">
@@ -95,7 +90,7 @@ const Auth = () => {
               </span>
             </div>
           </div>
-
+          
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
               <div className="space-y-2">
@@ -110,7 +105,7 @@ const Auth = () => {
                 />
               </div>
             )}
-
+            
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
