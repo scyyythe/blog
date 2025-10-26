@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getApi } from './request/api';
 
 function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api')
-      .then(res => setMessage(res.data.message))
+    getApi()
+      .then(data => setMessage(data.message))
       .catch(err => console.error(err));
   }, []);
 
